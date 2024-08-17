@@ -37,7 +37,7 @@ tclsh flash:ping.tcl
 
 
 # Embedded Event Manager (EEM) 
-
+```
 !
 event manager applet loopbacl10_down
 event syslog pattern "1 interface Lo10 line-protocol Up -> Down" period 1
@@ -50,3 +50,4 @@ action 6.0 syslog msg "Porque a int loop10 foi desativada?
 !
 end
 !
+```
