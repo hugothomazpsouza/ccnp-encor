@@ -12,9 +12,9 @@ data = {
     "nome": "Hugo",
     "idade": 31
 }
+```
 
-
-# Trabalhando com o Pacote JSON (import json)
+## Trabalhando com o Pacote JSON (import json)
 
 A função `json.dumps()` é usada para converter objetos Python (dicionário, lista, string, inteiro, booleano, etc.) em strings JSON. O nome da função significa "despejar" os dados como uma string, note que o "s" final em "dumps" representa "string". Aqui está um exemplo simples:
 
@@ -24,9 +24,9 @@ import json
 data = {'nome': 'Hugo', 'idade': 31}  # Define um dicionário Python
 json_data = json.dumps(data)  # Usa json.dumps() para converter o dicionário em uma string JSON
 print(json_data)  # Saída: '{"nome": "Hugo", "idade": 25}'
+```
 
-
-# Trabalhando com o Pacote JSON (import json)
+## Trabalhando com o Pacote JSON (import json)
 
 A função `json.loads()` converte uma string JSON em um dicionário Python, sendo o oposto de `json.dumps()`. Podemos adicionar este código ao exemplo acima:
 
@@ -37,9 +37,9 @@ import json
 dict_obj = json.loads(json_data)
 print(dict_obj)  # Saída: {'name': 'John', 'age': 25}
 print(type(dict_obj))  # Saída: <class 'dict'>
+```
 
-
-# Mais sobre `json.dumps()`
+## Mais sobre `json.dumps()`
 
 O método `json.dumps()` é muito poderoso para lidar com estruturas mais complexas. Ele pode gerenciar listas, dicionários aninhados e outros objetos Python complexos com facilidade. Abaixo está outro exemplo de uso de `json.dumps()` para um objeto Python complexo:
 
@@ -62,13 +62,13 @@ json_data = json.dumps(data)
 print(json_data)
 # Saída:
 # '{"nome": "Hugo", "idade": 31, "animais": ["Cachorro", "Gato"], "perfil": {"trabalho": "Network Engineer", "cidade": "João Pessoa"}}'
+```
 
-
-# Trabalhando com arquivos JSON (ler e escrever arquivos, converter para string JSON ou objeto Python)
+## Trabalhando com arquivos JSON (ler e escrever arquivos, converter para string JSON ou objeto Python)
 
 Existem algumas maneiras de manipular um arquivo JSON em Python:
 
-## Ler um arquivo JSON
+### Ler um arquivo JSON
 
 Podemos usar o método `file.load()` (note: `load`, não `loads`) para ler um objeto de arquivo e fazer o parsing ao mesmo tempo:
 
@@ -79,9 +79,9 @@ with open("user.json", "r") as json_file:
     json_file_content = json.load(json_file)
 
 print(json_file_content)
+```
 
-
-## Escrevendo em um Arquivo JSON
+### Escrevendo em um Arquivo JSON
 
 A função `json.dump()` é semelhante à `json.dumps()`, mas em vez de converter o objeto Python para uma string JSON, ela escreve os dados JSON diretamente em um arquivo.
 
@@ -100,7 +100,7 @@ with open('data.json', 'r') as f:
     print(f.read())
 # Saída:
 # '{"name": "Hugo", "age": 31}'
-
+```
 
 ## Resumo 
 
