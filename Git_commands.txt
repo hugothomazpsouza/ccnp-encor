@@ -1,0 +1,298 @@
+# GIT
+
+Parte 1
+Visualizando → https://git-school.github.io/visualizing-git/
+
+#Documentação do git
+Acesse o link: -> https://git-scm.com/doc
+
+#Instalação do git na maquina
+Windows -> baixar o exe pelo link: https://git-scm.com
+Linux -> seguir os passos do link: https://git-scm.com/download/linux
+MacOS -> seguir os passos do link: https://git-scm.com/download/mac
+
+`git --version` -> verificar a versão do git instalado
+
+#Entendendo como funciona o estado dos arquivos no git
+Acesse o link: https://git-scm.com/book/pt-br/v2/Fundamentos-de-Git-Gravando-Altera%C3%A7%C3%B5es-em-Seu-Reposit%C3%B3rio
+
+#criar um repo local para trabalhar
+`mkdir <diretorio>` -> cria a pasta para armazenar as informações
+`cd <diretorio-criado>` ->entra no diretorio criado
+`touch <nome-arquivo>` -> cria um arquivo
+`nano <arquivo-criado>` -> edita arquivo
+`git init` -> inicia um repositorio git no local
+
+#Informações do autor para monitorar o repo local.
+`git config —local user.name <usuario-git>`
+`git config —local user.email <email-git>`
+
+#Informações do autor para monitorar todos os repos.
+`git config —global user.name <usuario-git>`
+`git config —global user.email <email-git>`
+
+Dica: para entender melhor a customização das configurações git acesse:
+
+#comandos basicos git
+`git status` -> mostra o estado do repositorio
+`git add <arquivo/diretorio>` -> Adiciona o arquivo/diretorio para ser monitorado pelo git
+`git commit -m “descrição da ação realizada”` -> salva as alterações no ponto desejado
+`git log` -> Mostra o histórico das alterações commitadas
+`git log —oneline` -> visualizar todos os commits em uma unica linha
+`git log -p` -> mostra em detalhes cada alteração no commits
+`git log —help` -> Ajuda com os logs git
+
+Dica: para mais informaçoes de logs acesse:  https://devhints.io/git-log
+
+#Ignorando arquivos/diretorios para não serem monitorados
+`touch .gitignore`
+`echo <nome-arquivo> >> .gitignore`
+`echo <nome-arquivo>/ >> .gitignore`
+`git add .gitignore`
+`git commit -m “Adicionando o .gitignore”`
+
+##################################
+
+#Parte 2 - Criando um servidor git local
+`mkdir <diretorio>` -> cria a pasta para armazenar as informações
+`cd <diretorio-criado>` ->entra no diretorio criado
+`git init --bare` -> inicia um repositorio git que armazena apenas as alterações dos arquivos(não uma copia fisica de cada arquivo)
+`pwd` -> mostar a pasta atual (caminho desse servidor criado)
+
+##################################
+
+#Parte 3 - Volte para o repo criado na Parte 1
+`git remote` -> lista os repositorios remotos conhecidos
+`git remote add <nome-desejado> <caminho-servidor>` -> o destino pode ser uma URL, IP ou diretorio local.
+`git remote`
+`git remote -v` ->  lista os repositorios remotos conhecidos com detalhes
+
+###################################
+
+#Parte 4 - Clonando o projeto em outra maquina ou outro diretorio
+
+`git clone <caminho-servidor> <nome-projeto>` -> Faz um copia do projeto presente no servidor e adiciona o nome desejado ao projeto
+
+###################################
+
+#Parte 5 - Enviando os commits realizados na parte 1 para o servidor
+
+`git remote -v` ->  lista os repositorios remotos conhecidos com detalhes
+`git push <remote-listado> <branch>` -> enviar as alterações para o servidor na branch selecionada
+
+###################################
+
+#Parte 6 - Volte para o projeto clonado na outra maquina ou diretorio
+
+`ls` -> lista os arquivos no diretorio
+`git remote -v` ->  lista os repositorios remotos conhecidos com detalhes
+`git remote rename <nome-atual> <nome-desejado>` -> renomeando o repo para padronizar
+`git pull <nome-remote> <branch-desejada>` -> Atualiza os dados conforme alterações existentes no servidor
+`ls` -> lista os arquivos no diretoria
+
+OBS: perceba que as informações presentes em .gitignore criadas no final da parte 1 não foram resgatadas
+
+DICA: Agora realize varias alterações para se acostumar com os comandos e entender melhor o funcionamento do git.
+
+#################################
+
+#Parte 7  - Limpando as Informações
+
+`git checkout --<file>` -> Retorna ao estado sem modificações
+`git reset HEAD <file>` -> Retorna ao estado anterior de ter utilizado o git add
+`git stash`  -> Salva as alteraçoes sem commit em um local temporário(não gera log)
+`git revert <commit>` -> Retorna ao estado anterior de ter utilizado git commit
+
+###################################
+
+# Parte 8
+
+`git stash list` -> Mostra os stash salvos
+`git stash aply <stash>` -> busca o stash salvo para poder dar continuidade ao trabalho
+`git stash drop <stash>` -> Apaga o stash especifico
+`git stash pop` -> faz a função git stash aply <stash> e git stash drop <stash>
+
+#####################################
+
+#Parte 9 - Utilizar commits anteriores
+
+`git checkout <hash_commit>` -> volta para o commit desejado
+
+##Pode usar essa estrategia para testar o codigo, porém se quiser efetivar o uso, precisa criar uma branch a partir deste ponto.
+
+#######################################
+
+#Parte 10 - Visualizar alterações/compara
+
+`giit diff` -> visualizo todas as alteraçoes antes do git add
+`git dif <hash_commit>..<hash_commit>` -> visualizo todas as alterações do commit inicial informado até o commit final informado.
+
+#######################################
+
+#Parte 11 - Tags
+
+`git tag -a <nome_tag> -m “<mensagem>”` -> Cria uma tag com sua respectiva mensagem ex.: utilizar para criar a versão v1.0.0
+`git tag` -> mostra todas as tags
+`git push <repo> <tag>` -> envia a tag local para o repositorio remoto
+
+**ETAPA 01 - Código Python simples para subir containers - Usando Lib Docker(**https://docker-py.readthedocs.io/en/stable/**)**
+
+```python
+import docker
+
+def run_docker_container(container_name, port_mapping, volume_mapping, image_name):
+    client = docker.from_env()
+
+    try:
+        client.containers.get(container_name).remove(force=True)
+        print(f"Contêiner '{container_name}' anterior removido com sucesso.")
+    except docker.errors.NotFound:
+        print(f"Contêiner '{container_name}' não encontrado. Não foi necessário remover.\n")
+
+    print(f"Iniciando contêiner '{container_name}'...")
+    client.containers.run(image_name,
+                          name=container_name,
+                          restart_policy={"Name": "on-failure"},
+                          detach=True,
+                          ports={port_mapping.split(':')[1]: port_mapping.split(':')[0]},
+                          volumes={volume_mapping.split(':')[0]: {'bind': volume_mapping.split(':')[1], 'mode': 'rw'}},
+                          cpuset_cpus='0-1',
+                          mem_limit='256m')
+    print(f"Contêiner '{container_name}' iniciado com sucesso.\n")
+
+if __name__ == "__main__":
+    client = docker.from_env()
+
+    print("Iniciando execução do script...\n")
+    run_docker_container('teste_frontDev', '8000:80', '/home/devasc/Desktop/teste/front-dev:/usr/share/nginx/html', 'nginx')
+    run_docker_container('teste_frontHomol', '8001:80', '/home/devasc/Desktop/teste/front-homolog:/usr/share/nginx/html', 'nginx')
+    print("Script executado com sucesso.")
+```
+
+**ETAPA 02 - Aprimorando o código em python para subir os containers**
+
+```python
+import docker
+
+def run_docker_container(container_name, port_mapping, volume_mapping, image_name):
+    client = docker.from_env()
+
+    try:
+        client.containers.get(container_name).remove(force=True)
+        print(f"Contêiner '{container_name}' anterior removido com sucesso.")
+    except docker.errors.NotFound:
+        print(f"Contêiner '{container_name}' não encontrado. Não foi necessário remover.\n")
+
+    print(f"Iniciando contêiner '{container_name}'...")
+    client.containers.run(image_name,
+                          name=container_name,
+                          restart_policy={"Name": "on-failure"},
+                          detach=True,
+                          ports={port_mapping.split(':')[1]: port_mapping.split(':')[0]},
+                          volumes={volume_mapping.split(':')[0]: {'bind': volume_mapping.split(':')[1], 'mode': 'rw'}},
+                          cpuset_cpus='0-1',
+                          mem_limit='256m')
+    print(f"Contêiner '{container_name}' iniciado com sucesso.\n")
+
+def run_front_container(container_name, port_mapping, volume_mapping, image_name):
+    run_docker_container(container_name, port_mapping, volume_mapping, image_name)
+    client = docker.from_env()
+    container = client.containers.get(container_name)
+    container.exec_run('mkdir /usr/share/nginx/html/teste')
+    container.exec_run('cp /usr/share/nginx/html/index.html /usr/share/nginx/html/teste/teste.txt')
+
+if __name__ == "__main__":
+    client = docker.from_env()
+
+    print("Iniciando execução do script...\n")
+    run_front_container('teste_frontDev', '8000:80', '/home/devasc/Desktop/teste/front-dev:/usr/share/nginx/html', 'nginx')
+    run_front_container('teste_frontHomol', '8001:80', '/home/devasc/Desktop/teste/front-homolog:/usr/share/nginx/html', 'nginx')
+    print("Script executado com sucesso.")
+```
+
+**Compare com a Lib Docker com a Lib subprocess do python**
+
+```python
+import subprocess
+
+def run_docker_container(container_name, port_mapping, volume_mapping, image_name):
+    try:
+        subprocess.run(['docker', 'stop', container_name], check=True)
+        subprocess.run(['docker', 'rm', container_name], check=True)
+        print(f"Contêiner '{container_name}' anterior removido com sucesso.")
+    except subprocess.CalledProcessError:
+        print(f"Contêiner '{container_name}' não encontrado. Não foi necessário remover.\n")
+
+    print(f"Iniciando contêiner '{container_name}'...")
+    subprocess.run(['docker', 'run', '-d', '--name', container_name, '--restart', 'on-failure',
+                    '-p', port_mapping, '-v', volume_mapping, '--cpuset-cpus', '0-1', '--memory', '256m',
+                    image_name], check=True)
+    print(f"Contêiner '{container_name}' iniciado com sucesso.\n")
+
+def run_front_container(container_name, port_mapping, volume_mapping, image_name):
+    run_docker_container(container_name, port_mapping, volume_mapping, image_name)
+
+    print(f"Criando diretório '/usr/share/nginx/html/teste' no contêiner '{container_name}'...")
+    subprocess.run(['docker', 'exec', container_name, 'mkdir', '/usr/share/nginx/html/teste'], check=True)
+    print("Diretório criado com sucesso.")
+
+    print(f"Copiando arquivo '/usr/share/nginx/html/index.html' para '/usr/share/nginx/html/teste/teste.txt' no contêiner '{container_name}'...")
+    subprocess.run(['docker', 'exec', container_name, 'cp', '/usr/share/nginx/html/index.html', '/usr/share/nginx/html/teste/teste.txt'], check=True)
+    print("Arquivo copiado com sucesso.")
+
+if __name__ == "__main__":
+    print("Iniciando execução do script...\n")
+    run_front_container('teste_frontDev', '8000:80', '/home/devasc/Desktop/teste/front-dev:/usr/share/nginx/html', 'nginx')
+    run_front_container('teste_frontHomol', '8001:80', '/home/devasc/Desktop/teste/front-homolog:/usr/share/nginx/html', 'nginx')
+    print("Script executado com sucesso.")
+
+```
+
+**Compare Python com Shell Script**
+
+```bash
+#!/bin/bash
+
+run_docker_container() {
+    container_name=$1
+    port_mapping=$2
+    volume_mapping=$3
+    image_name=$4
+
+    docker stop $container_name 2>/dev/null
+    docker rm $container_name 2>/dev/null
+    echo "Contêiner '$container_name' anterior removido com sucesso."
+
+    echo "Iniciando contêiner '$container_name'..."
+    docker run -d --name $container_name --restart on-failure \
+        -p $port_mapping -v $volume_mapping --cpuset-cpus 0-1 --memory 256m \
+        $image_name
+    echo "Contêiner '$container_name' iniciado com sucesso."
+}
+
+run_front_container() {
+    container_name=$1
+    port_mapping=$2
+    volume_mapping=$3
+    image_name=$4
+
+    run_docker_container $container_name $port_mapping $volume_mapping $image_name
+
+    echo "Criando diretório '/usr/share/nginx/html/teste' no contêiner '$container_name'..."
+    docker exec $container_name mkdir /usr/share/nginx/html/teste
+    echo "Diretório criado com sucesso."
+
+    echo "Copiando arquivo '/usr/share/nginx/html/index.html' para '/usr/share/nginx/html/teste/teste.txt' no contêiner '$container_name'..."
+    docker exec $container_name cp /usr/share/nginx/html/index.html /usr/share/nginx/html/teste/teste.txt
+    echo "Arquivo copiado com sucesso."
+}
+
+echo "Iniciando execução do script..."
+
+run_front_container 'teste_frontDev' '8000:80' '/home/devasc/Desktop/teste/front-dev:/usr/share/nginx/html' 'nginx'
+run_front_container 'teste_frontHomol' '8001:80' '/home/devasc/Desktop/teste/front-homolog:/usr/share/nginx/html' 'nginx'
+
+echo "Script executado com sucesso."
+```
+
+**“Agora é com você! Utilize o código da etapa 2 e crie cenários para que você possa práticar.”**
