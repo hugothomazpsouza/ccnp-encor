@@ -1,0 +1,83 @@
+- Go to the Devnet Sandbox web page, launch "IOS XE on Cat8kv AlwaysOn" 
+
+Note: Turn off the certificate verification (config > file > Settings > Certificates)
+
+Cat8000v Host:
+Public URL: devnetsandboxiosxe.cisco.com
+Username: admin
+Password: C1sco12345
+RESTCONF port: 443
+NETCONF port: 830
+gRPC telemetry port: 57500
+ssh port: 22
+Example Connection: ssh admin@devnetsandboxiosxe.cisco.com
+
+
+1ª test
+
+Get interfaces
+• Use the DevNet IOS XE always on sandbox
+• URL: https://{{host}}:{{port}}/restconf/data/ietf-interfaces:interfaces
+• Method: GET
+• Username: admin
+• Password: C1sco12345
+ Add a header
+• Key: Accept - value: application/yang-data+json
+
+•Check the HTTP status code
+
+
+Add an interface Part 1:
+• Use the DevNet IOS XE always on sandbox
+• URL: https://{{host}}:{{port}}/restconf/data/ietf-interfaces:interfaces
+• Method: POST
+• Username: admin
+• Password: C1sco12345
+
+Add a header:
+• Key 1: Accept - Value application/yang-data+json
+• Key 2: Content-Type - Value: application/yang-data+json
+
+•Body:
+{
+    "ietf-interfaces:interface": {
+        "name": "Loopback101",
+        "description": "Configured by RESTCONF",
+        "type": "iana-if-type:softwareLoopback",
+        "enabled": true,
+        "ietf-ip:ipv4": {
+            "address": [
+                {
+                    "ip": "172.16.101.1",
+                    "netmask": "255.255.255.0"
+                }
+            ]
+        }
+    }
+}
+
+•Check the HTTP status code
+
+
+Get a specific interfaces
+Get interfaces
+• Use the DevNet IOS XE always on sandbox
+• URL: https://{{host}}:{{port}}/restconf/data/ietf-interfaces:interfaces/interface=Loopback101
+• Method: GET
+• Username: admin
+• Password: C1sco12345
+ Add a header
+• Key: Accept - value: application/yang-data+json
+
+
+Delete an Interface
+Use the DevNet IOS XE always on sandbox
+• URL: https://{{host}}:{{port}}/restconf/data/ietf-interfaces:interfaces/interface=Loopback101
+• Replace Interface name with correct name.
+• Method: DELETE
+• Username: developer
+• Password: C1sco12345
+ Add a header
+• Key: Accept - value: application/yang-data+json
+
+
