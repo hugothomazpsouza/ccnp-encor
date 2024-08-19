@@ -52,7 +52,7 @@ action 2.0 cli command "config terminal"
 action 3.0 cli command "interface loopback10"
 action 4.0 cli command "shutdown"
 action 5.0 cli command "no shutdown"
-action 6.0 syslog msg "Porque a int loop10 foi desativada?"
+action 6.0 syslog msg "A Int loop10 foi desativada, mas ativamos novamente"
 !
 end
 !
@@ -62,6 +62,6 @@ Habilitar o Debug
 
 ```
 !
-debug event manager ction cli
+debug event manager action cli
 !
 ```
