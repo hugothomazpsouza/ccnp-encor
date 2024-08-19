@@ -25,8 +25,14 @@ Copiar para dentro da flash e executar dentro do dispositivo
 
 Abrir powershell e transferir via scp:
 
+Copiar da máquina para o router. Exemplo:
 ```
 scp.exe .\ping.tcl admin@devnetsandboxiosxe.cisco.com:ping.tcl
+```
+
+Copiar do router para o máquina. Exemplo:
+```
+scp.exe admin@devnetsandboxiosxe.cisco.com:flash:/packages.conf .
 ```
 
 Executar o script:
