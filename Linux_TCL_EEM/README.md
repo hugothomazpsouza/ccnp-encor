@@ -51,3 +51,11 @@ action 6.0 syslog msg "Porque a int loop10 foi desativada?
 end
 !
 ```
+
+Habilitar o Debug
+
+```
+!
+debug event manager ction cli
+!
+```
