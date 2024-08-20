@@ -40,6 +40,34 @@ Executar o script:
 tclsh flash:ping.tcl
 ```
 
+Ping test:
+```
+tclsh
+puts [open "flash:new_ping_test.tcl" w+] {
+    foreach ip {
+    192.168.1.1
+    192.168.1.2
+    192.168.1.3
+    192.168.1.4
+} {
+    set result [exec "ping $ip timeout 1"]
+    if { [regexp "(!!!)" $result] } {
+        puts "Ping to $ip: SUCCESS"
+    } else {
+        puts "Ping to $ip: FAILED"
+    }
+}
+}
+!
+tclquit
+!
+!
+!Executar scprit
+tclsh flash:new_ping_test.tcl
+!
+```
+
+
 Documentação: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ios_tcl/configuration/12-4t/ios-tcl-12-4t-book/nm-script-tcl.html
 
 
