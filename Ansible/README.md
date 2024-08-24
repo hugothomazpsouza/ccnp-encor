@@ -94,8 +94,74 @@ No terminal, execute o seguinte comando para aplicar a configuração:
 ansible-playbook -i hosts set_hostname.yml
 ```
 
+# Exemplo de Playbook Ansible para Configurar uma Interface Loopback
 
-# Crie um arquivo chamado show_ip_interface_brief.yml com o seguinte conteúdo:
+Crie um arquivo chamado configure_loopback.yml com o seguinte conteúdo:
+
+```yaml
+---
+- name: Configure Loopback interface on Cisco router
+  hosts: cisco_routers
+  gather_facts: no
+  connection: network_cli
+  tasks:
+    - name: Configure Loopback interface
+      cisco.ios.ios_config:
+        lines:
+          - interface Loopback150
+          - ip address 192.168.150.1 255.255.255.255
+          - description Loopback interface for management
+        # Optional: Use `match` to control how Ansible checks the current configuration
+        match: line
+```
+
+Descrição das Linhas
+---
+Marca o início do arquivo YAML.
+
+- name: Configure Loopback interface on Cisco router
+Nome do playbook, descrevendo a configuração de uma interface Loopback em um roteador Cisco.
+
+hosts: cisco_routers
+Define o grupo de hosts onde o playbook será executado. O grupo cisco_routers deve estar definido no seu arquivo de inventário (hosts).
+
+gather_facts: no
+Indica que não deve coletar informações adicionais sobre os hosts antes de executar as tarefas.
+
+connection: network_cli
+Especifica o método de conexão a ser usado para dispositivos de rede. network_cli é o método correto para dispositivos Cisco IOS.
+
+tasks:
+Inicia a seção onde as tarefas são definidas.
+
+- name: Configure Loopback interface
+Nome da tarefa que configura a interface Loopback.
+
+cisco.ios.ios_config:
+O módulo usado para aplicar configurações em dispositivos Cisco IOS.
+
+lines:
+Define as linhas de configuração que serão aplicadas ao dispositivo. Neste caso, são as configurações para a interface Loopback.
+
+interface Loopback0
+Seleciona a interface Loopback 0 para configuração.
+
+ip address 192.168.1.1 255.255.255.0
+Define o endereço IP e a máscara de sub-rede para a interface Loopback.
+
+description Loopback interface for management
+Adiciona uma descrição para a interface Loopback.
+
+# Optional: Use match to control how Ansible checks the current configuration
+Comentário opcional. O parâmetro match pode ser usado para definir como o Ansible verifica a configuração atual. Usar match: line pode ser útil para garantir que o Ansible reconheça mudanças na configuração existente.
+
+
+
+
+
+# Script Ansible que execute o comando show ip interface brief em um roteador
+
+- Crie um arquivo chamado show_ip_interface_brief.yml com o seguinte conteúdo:
 
 ```yaml
 ---
@@ -155,3 +221,4 @@ Módulo usado para exibir mensagens de depuração.
 
 msg: "{{ command_output.stdout[0] }}"
 Mensagem exibida pelo módulo debug, mostrando a saída do comando. stdout[0] refere-se à saída do primeiro comando na lista de comandos executados.
+
