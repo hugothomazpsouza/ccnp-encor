@@ -93,3 +93,65 @@ No terminal, execute o seguinte comando para aplicar a configuração:
 ```
 ansible-playbook -i hosts set_hostname.yml
 ```
+
+
+# Crie um arquivo chamado show_ip_interface_brief.yml com o seguinte conteúdo:
+
+```yaml
+---
+- name: Execute 'show ip interface brief' on Cisco router
+  hosts: cisco_routers
+  gather_facts: no
+  connection: network_cli
+  tasks:
+    - name: Run 'show ip interface brief'
+      cisco.ios.ios_command:
+        commands:
+          - show ip interface brief
+      register: command_output
+
+    - name: Display command output
+      debug:
+        msg: "{{ command_output.stdout[0] }}"
+...
+```
+
+Descrição das Linhas
+---
+Marca o início do arquivo YAML, indicando que este é um documento YAML.
+
+- name: Execute 'show ip interface brief' on Cisco router
+Nome do playbook, descrevendo que ele executará o comando show ip interface brief em um roteador Cisco.
+
+hosts: cisco_routers
+Define o grupo de hosts onde o playbook será executado. O grupo cisco_routers deve estar definido no seu arquivo de inventário (hosts).
+
+gather_facts: no
+Indica que não deve coletar informações adicionais sobre os hosts antes de executar as tarefas.
+
+connection: network_cli
+Especifica o método de conexão a ser usado para dispositivos de rede. network_cli é o método correto para dispositivos Cisco IOS.
+
+tasks:
+Inicia a seção onde as tarefas são definidas.
+
+- name: Run 'show ip interface brief'
+Nome da tarefa que executará o comando no roteador Cisco.
+
+cisco.ios.ios_command:
+O módulo usado para enviar comandos para o dispositivo Cisco. O parâmetro commands recebe uma lista de comandos a serem executados.
+
+commands:
+Lista dos comandos que serão executados no dispositivo. Neste caso, contém o comando show ip interface brief.
+
+register: command_output
+Armazena a saída do comando na variável command_output.
+
+- name: Display command output
+Nome da tarefa que exibirá a saída do comando.
+
+debug:
+Módulo usado para exibir mensagens de depuração.
+
+msg: "{{ command_output.stdout[0] }}"
+Mensagem exibida pelo módulo debug, mostrando a saída do comando. stdout[0] refere-se à saída do primeiro comando na lista de comandos executados.
