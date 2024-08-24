@@ -222,3 +222,75 @@ Módulo usado para exibir mensagens de depuração.
 msg: "{{ command_output.stdout[0] }}"
 Mensagem exibida pelo módulo debug, mostrando a saída do comando. stdout[0] refere-se à saída do primeiro comando na lista de comandos executados.
 
+
+
+
+# ###################################################
+
+# Aqui estão alguns exemplos de comandos para cada uma das ferramentas do Ansible mencionadas:
+
+
+-O comando ansible é usado para executar comandos diretamente em um ou mais hosts gerenciados.
+Exemplo:
+```
+ansible all -i hosts -m ping
+```
+all: Aplica o comando a todos os hosts definidos no arquivo hosts.
+-i hosts: Especifica o arquivo de inventário.
+-m ping: Usa o módulo ping para verificar a conectividade com os hosts.
+
+
+- ansible-playbook
+O comando ansible-playbook é usado para executar playbooks, que são arquivos YAML contendo uma série de tarefas a serem executadas em hosts gerenciados.
+
+Exemplo:
+```
+ansible-playbook -i hosts set_hostname.yml
+```
+-i hosts: Especifica o arquivo de inventário.
+set_hostname.yml: O arquivo de playbook a ser executado.
+
+- ansible-doc
+O comando ansible-doc é usado para visualizar a documentação dos módulos e plugins do Ansible.
+
+Exemplo:
+```
+ansible-doc cisco.ios.ios_config
+```
+cisco.ios.ios_config: O módulo para o qual você deseja ver a documentação.
+
+- ansible-pull
+O comando ansible-pull é usado para puxar e executar um playbook de um repositório de controle remoto em um nó cliente.
+
+Exemplo:
+```
+ansible-pull -U https://github.com/username/repository.git playbook.yml
+-U https://github.com/username/repository.git: URL do repositório Git onde o playbook está armazenado.
+playbook.yml: O arquivo de playbook a ser executado.
+```
+
+- ansible-vault
+O comando ansible-vault é usado para criar, editar, e acessar arquivos criptografados com o Ansible Vault.
+
+Exemplos:
+- Criar um novo arquivo criptografado:
+```
+ansible-vault create secrets.yml
+```
+Você será solicitado a inserir uma senha para criptografar o arquivo.
+
+- Editar um arquivo criptografado:
+```
+ansible-vault edit secrets.yml
+```
+
+- Descriptografar um arquivo:
+```
+ansible-vault decrypt secrets.yml
+```
+
+- Visualizar o conteúdo de um arquivo criptografado:
+```
+ansible-vault view secrets.yml
+```
+
