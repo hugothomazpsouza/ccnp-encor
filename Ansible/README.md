@@ -241,6 +241,7 @@ all: Aplica o comando a todos os hosts definidos no arquivo hosts.
 
 
 - ansible-playbook
+
 O comando ansible-playbook é usado para executar playbooks, que são arquivos YAML contendo uma série de tarefas a serem executadas em hosts gerenciados.
 
 Exemplo:
