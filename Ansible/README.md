@@ -152,7 +152,7 @@ Define o endereço IP e a máscara de sub-rede para a interface Loopback.
 description Loopback interface for management
 Adiciona uma descrição para a interface Loopback.
 
-# Optional: Use match to control how Ansible checks the current configuration
+#Optional: Use match to control how Ansible checks the current configuration
 Comentário opcional. O parâmetro match pode ser usado para definir como o Ansible verifica a configuração atual. Usar match: line pode ser útil para garantir que o Ansible reconheça mudanças na configuração existente.
 
 
