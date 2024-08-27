@@ -15,9 +15,9 @@ cd web_container
 ```
 
 3.	Criar a página web:
-- Dentro do diretório do projeto, crie um arquivo HTML.
-```
-echo "<!DOCTYPE html>
+- Dentro do diretório do projeto, crie um arquivo HTML (index.html) e copie esse código abaixo .
+```html
+<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
@@ -27,7 +27,7 @@ echo "<!DOCTYPE html>
 <body>
     <h1>Hello from Docker!</h1>
 </body>
-</html>" > index.html
+</html>
 ```
 
 4.	Criar um Dockerfile:
