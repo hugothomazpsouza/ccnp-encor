@@ -62,16 +62,21 @@ docker run -d -p 8080:80 my-web-container
 - Abra o navegador web e acesse http://localhost:8080. Você deve ver a página web que você criou.
 
 Explicação:
-•	Dockerfile:
-o	FROM nginx:alpine: Usa a imagem base do Nginx.
-o	COPY index.html /usr/share/nginx/html/index.html: Copia o arquivo index.html para o diretório onde o Nginx espera encontrar arquivos web.
-o	EXPOSE 80: Expõe a porta 80 do contêiner.
-o	CMD ["nginx", "-g", "daemon off;"]: Inicia o Nginx no modo de primeiro plano.
-•	Comandos Docker:
-o	docker build -t my-web-container .: Constrói a imagem Docker e a marca com o nome my-web-container.
-o	docker run -d -p 8080:80 my-web-container: Executa o contêiner em segundo plano (-d) e mapeia a porta 80 do contêiner para a porta 8080 do host.
+- Dockerfile:
+    - FROM nginx:alpine: Usa a imagem base do Nginx.
+    - COPY index.html /usr/share/nginx/html/index.html: Copia o arquivo index.html para o diretório onde o Nginx espera encontrar arquivos web.
+    - EXPOSE 80: Expõe a porta 80 do contêiner.
+    - CMD ["nginx", "-g", "daemon off;"]: Inicia o Nginx no modo de primeiro plano.
+
+- Comandos Docker:
+    - docker build -t my-web-container .: Constrói a imagem Docker e a marca com o nome my-web-container.
+    - docker run -d -p 8080:80 my-web-container: Executa o contêiner em segundo plano (-d) e mapeia a porta 80 do contêiner para a porta 8080 do host.
+
+
 Esse exemplo cria um contêiner Docker que serve uma página web simples usando o Nginx. Você pode personalizar a página HTML e adicionar mais arquivos conforme necessário.
- 
+
+# Comandos
+
 1. Instalação e Verificação
 •	Verificar a versão do Docker:
 ```
